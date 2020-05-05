@@ -1,0 +1,621 @@
+﻿<Window x:Class="DBMSProject.EditorViewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DBMSProject"
+        mc:Ignorable="d"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Icon="/Pictures/022-documents.png"
+        WindowStartupLocation="CenterScreen"
+        Title="Journal of E-commerce Research Knowledge" 
+        Height="700" MaxHeight="700" 
+        Width="1325" MaxWidth="1325">
+    <Grid>
+        <StackPanel Margin="5">
+            <!-- Header -->
+            <StackPanel Orientation="Horizontal" 
+                        Margin="2">
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Left"
+                            Width="1035"
+                            Height="60">
+                    <TextBlock Text="Welcome, " 
+                               FontSize="24" 
+                               FontFamily="MotivaSansW05-ExtraBold" 
+                               FontStretch="SemiExpanded" 
+                               HorizontalAlignment="Left" 
+                               VerticalAlignment="Center"
+                               Margin="5,0,0,0">
+                    </TextBlock>
+                    <TextBlock Text="{Binding Path = EditorFirstName}" 
+                               FontSize="24" 
+                               FontFamily="MotivaSansW05-ExtraBold" 
+                               FontStretch="SemiExpanded" 
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center">
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right">
+                    <Button Height="60" 
+                            Width="60" 
+                            HorizontalAlignment="Right"
+                            Command="{Binding Path = LogoutCommand}">
+                        <StackPanel>
+                            <Image Source="/Pictures/return.png" 
+                                   Width="30"
+                                   Height="30"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Stretch="Fill"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Height="60" 
+                            Width="60" 
+                            HorizontalAlignment="Right"
+                            Margin="5,0,0,0"
+                            Command="{Binding Path = RefreshCommand}">
+                        <StackPanel>
+                            <Image Source="/Pictures/010-location.png" 
+                                   Width="30"
+                                   Height="30"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Stretch="Fill"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Height="60" 
+                            Width="60" 
+                            HorizontalAlignment="Right"
+                            Margin="5,0,0,0"
+                            Command="{Binding Path = ProfileCommand}">
+                        <StackPanel>
+                            <Image Source="/Pictures/017-newspaper.png" 
+                                   Width="30"
+                                   Height="30"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Stretch="Fill"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Height="60" 
+                            Width="60" 
+                            HorizontalAlignment="Right"
+                            Margin="5,0,0,0"
+                            Command="{Binding Path = InformationCommand}">
+                        <StackPanel>
+                            <Image Source="/Pictures/008-idea.png" 
+                                   Width="30"
+                                   Height="30"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Stretch="Fill"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+            <!-- Body -->
+            <StackPanel Orientation="Horizontal" 
+                        Margin="0,30,0,0">
+                <!-- First Pane -->
+                <StackPanel Width="325" Height="550">
+                    <TextBlock Text="Received Manuscripts" 
+                               FontSize="24" 
+                               FontFamily="MotivaSansW05-ExtraBold" 
+                               FontStretch="SemiExpanded" 
+                               HorizontalAlignment="Center">
+                    </TextBlock>
+                    <ListBox Width="300" 
+                             Margin="0,5,0,0" 
+                             Background="#404DB6" 
+                             Height="175" 
+                             ItemsSource="{Binding Path = ReceivedManuscriptList}" 
+                             SelectionMode="Single"
+                             SelectedItem="{Binding Path = SelectedReceivedManuscript}"
+                             HorizontalAlignment="Center">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel CanVerticallyScroll="True" CanHorizontallyScroll="True">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Margin="5,0,0,0" 
+                                                   Text="{Binding Path = ManuscriptTitle}"
+                                                   Foreground="White">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button HorizontalAlignment="Center" 
+                            Margin="0,15,0,0" 
+                            Width="170"
+                            Height="40"
+                            Command="{Binding Path = RejectManuscriptCommand}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image Source="/Pictures/009-archive.png" 
+                                   Width="35"
+                                   Height="35"
+                                   Stretch="Fill"/>
+                            <TextBlock Text="Reject"
+                                       FontSize="18"
+                                       FontFamily="Gotham"
+                                       Margin="10,0,0,0"
+                                       VerticalAlignment="Center">
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <TextBlock Text="List of Reviewers" 
+                               FontSize="24" 
+                               FontFamily="MotivaSansW05-ExtraBold" 
+                               FontStretch="SemiExpanded" 
+                               HorizontalAlignment="Center"
+                               Margin="0,10,0,0">
+                    </TextBlock>
+                    <ListBox Width="300" 
+                             Margin="0,5,0,0" 
+                             Background="NavajoWhite" 
+                             Height="165" 
+                             ItemsSource="{Binding Path = FrontReviewerList}"  
+                             SelectionMode="Multiple"
+                             HorizontalAlignment="Center">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel CanVerticallyScroll="True">
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox Padding="3" 
+                                                  IsChecked="{Binding Path = IsSelected}">
+                                        </CheckBox>
+                                        <TextBlock Margin="5,3" 
+                                                   Text="{Binding Path = Name}">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button HorizontalAlignment="Center" 
+                            Margin="0,17,0,0" 
+                            Width="190"
+                            Height="40"
+                            Command="{Binding Path = AddReviewCommand}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image Source="/Pictures/018-recruitment.png" 
+                                   Width="35"
+                                   Height="35"
+                                   Stretch="Fill"/>
+                            <TextBlock Text="Peer Review"
+                                       FontSize="18"
+                                       FontFamily="Gotham"
+                                       Margin="10,0,0,0"
+                                       VerticalAlignment="Center">
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <!-- Separator -->
+                <Border BorderThickness="1" BorderBrush="#404DB6"></Border>
+                <!-- Second Pane -->
+                <StackPanel Height="550" Width="325">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="Under Review" 
+                                   FontSize="24" 
+                                   FontFamily="MotivaSansW05-ExtraBold" 
+                                   FontStretch="SemiExpanded" 
+                                   HorizontalAlignment="Center">
+                        </TextBlock>
+                        <Button Margin="10,0,0,0"
+                                Content="L"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontFamily="Gotham"
+                                Command="{Binding Path = LoadSelectedManuscriptReviewListCommand}"></Button>
+                    </StackPanel>
+                    
+                    <ListBox Width="300" 
+                             Margin="0,5,0,0" 
+                             Background="#404DB6" 
+                             Height="175" 
+                             ItemsSource="{Binding Path = UnderReviewManuscriptList}" 
+                             SelectionMode="Single"
+                             SelectedItem="{Binding Path = SelectedUnderReviewManuscript}"
+                             HorizontalAlignment="Center">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel CanVerticallyScroll="True" CanHorizontallyScroll="True">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Margin="5,0,0,0" 
+                                                   Text="{Binding Path = ManuscriptTitle}"
+                                                   Foreground="White">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <TextBlock Text="Reviews" 
+                               FontSize="24" 
+                               FontFamily="MotivaSansW05-ExtraBold" 
+                               FontStretch="SemiExpanded" 
+                               HorizontalAlignment="Center"
+                               Margin="0,10,0,0">
+                    </TextBlock>
+                    <ListBox Width="300" 
+                             Margin="0,5,0,0" 
+                             Background="#404DB6" 
+                             Height="100" 
+                             ItemsSource="{Binding Path = SelectedManuscriptReviewList}" 
+                             SelectionMode="Single"
+                             SelectedItem="{Binding Path = SelectedReview}"
+                             HorizontalAlignment="Center">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel CanVerticallyScroll="True" CanHorizontallyScroll="True">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Margin="5,0,0,0" 
+                                                   Text="{Binding Path = DateReviewed}"
+                                                   Foreground="White">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Orientation="Horizontal" 
+                                Margin="0,2,0,0">
+                        <StackPanel Width="150">
+                            <Border BorderThickness="0,0,0,2" 
+                                    Margin="0,3,0,0"
+                                    BorderBrush="#404DB6" 
+                                    Width="50"  
+                                    HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding Path = SelectedReview.AppropriatenessScore}" 
+                                           FontSize="12" 
+                                           FontWeight="Bold" 
+                                           HorizontalAlignment="Center"></TextBlock>
+                            </Border>
+                            <TextBlock Text="Appropriateness"
+                                       FontSize="15"
+                                       FontFamily="Gotham"
+                                       HorizontalAlignment="Center">
+                            </TextBlock>
+                            <Border BorderThickness="0,0,0,2" 
+                                    Margin="0,3,0,0"
+                                    BorderBrush="#404DB6" 
+                                    Width="50"  
+                                    HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding Path = SelectedReview.ClarityScore}" 
+                                           FontSize="12" 
+                                           FontWeight="Bold" 
+                                           HorizontalAlignment="Center"></TextBlock>
+                            </Border>
+                            <TextBlock Text="Clarity"
+                                       FontFamily="Gotham"
+                                       FontSize="15"
+                                       HorizontalAlignment="Center"
+                                       Margin="0,3,0,0">
+                            </TextBlock>
+                            <Border BorderThickness="0,0,0,2" 
+                                    Margin="0,3,0,0"
+                                    BorderBrush="#404DB6" 
+                                    Width="50"  
+                                    HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding Path = SelectedReview.MethodologyScore}" 
+                                           FontSize="12" 
+                                           FontWeight="Bold" 
+                                           HorizontalAlignment="Center"></TextBlock>
+                            </Border>
+                            <TextBlock Text="Methodology"
+                                       FontFamily="Gotham"
+                                       FontSize="15"
+                                       HorizontalAlignment="Center"
+                                       Margin="0,3,0,0">
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Width="150" 
+                                    Margin="5,0,0,0">
+                            <Border BorderThickness="0,0,0,2" 
+                                    Margin="0,3,0,0"
+                                    BorderBrush="#404DB6" 
+                                    Width="50"  
+                                    HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding Path = SelectedReview.ContributionScore}" 
+                                           FontSize="12" 
+                                           FontWeight="Bold" 
+                                           HorizontalAlignment="Center"></TextBlock>
+                            </Border>
+                            <TextBlock Text="Contribution"
+                                       FontSize="15"
+                                       FontFamily="Gotham"
+                                       HorizontalAlignment="Center">
+                            </TextBlock>
+                            <Border BorderThickness="0,0,0,2" 
+                                    Margin="0,3,0,0"
+                                    BorderBrush="#404DB6" 
+                                    Width="50"  
+                                    HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding Path = SelectedReview.RecommendationStatus}" 
+                                           FontSize="12" 
+                                           FontWeight="Bold" 
+                                           HorizontalAlignment="Center"></TextBlock>
+                            </Border>
+                            <TextBlock Text="Recommendation"
+                                       FontFamily="Gotham"
+                                       FontSize="15"
+                                       HorizontalAlignment="Center"
+                                       Margin="0,3,0,0">
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" 
+                                Margin="0,13,0,0"
+                                HorizontalAlignment="Center">
+                        <Button HorizontalAlignment="Center" 
+                                Width="150"
+                                Height="40"
+                                Command="{Binding Path = RejectManuscriptAgainCommand}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image Source="/Pictures/009-archive.png" 
+                                       Width="35"
+                                       Height="35"
+                                       Stretch="Fill"/>
+                                <TextBlock Text="Reject"
+                                           FontSize="18"
+                                           FontFamily="Gotham"
+                                           Margin="10,0,0,0"
+                                           VerticalAlignment="Center">
+                                </TextBlock>
+                            </StackPanel>
+                        </Button>
+                        <Button HorizontalAlignment="Center" 
+                                Width="150"
+                                Height="40"
+                                Margin="10,0,0,0"
+                                Command="{Binding Path = AcceptManuscriptCommand}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image Source="/Pictures/006-approval.png" 
+                                       Width="35"
+                                       Height="35"
+                                       Stretch="Fill"/>
+                                <TextBlock Text="Accept"
+                                           FontSize="18"
+                                           FontFamily="Gotham"
+                                           Margin="10,0,0,0"
+                                           VerticalAlignment="Center">
+                                </TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+                <!-- Separator -->
+                <Border BorderThickness="1" BorderBrush="#404DB6"></Border>
+                <!-- Third Pane -->
+                <StackPanel Height="550" Width="325">
+                    <TextBlock Text="Accepted Manuscripts" 
+                               FontSize="24" 
+                               FontFamily="MotivaSansW05-ExtraBold" 
+                               FontStretch="SemiExpanded" 
+                               HorizontalAlignment="Center">
+                    </TextBlock>
+                    <ListBox Width="300" 
+                             Margin="0,5,0,0" 
+                             Background="#404DB6" 
+                             Height="233" 
+                             ItemsSource="{Binding Path = AcceptedManuscriptList}" 
+                             SelectionMode="Single"
+                             SelectedItem="{Binding Path = SelectedAcceptedManuscript}"
+                             HorizontalAlignment="Center">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel CanVerticallyScroll="True" CanHorizontallyScroll="True">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Margin="5,0,0,0" 
+                                                   Text="{Binding Path = ManuscriptTitle}"
+                                                   Foreground="White">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <TextBlock Text="Typeset Details" 
+                               FontSize="24" 
+                               FontFamily="MotivaSansW05-ExtraBold" 
+                               FontStretch="SemiExpanded" 
+                               HorizontalAlignment="Center"
+                               Margin="0,10,0,0">
+                    </TextBlock>
+                    <TextBox HorizontalAlignment="Center"
+                             HorizontalContentAlignment="Center"
+                             Width="200"
+                             Text="{Binding Path = InputOrderInIssue}">
+                    </TextBox>
+                    <TextBlock Text="Order In Issue"
+                               FontSize="15"
+                               FontFamily="Gotham"
+                               HorizontalAlignment="Center">
+                    </TextBlock>
+                    <TextBox HorizontalAlignment="Center"
+                             HorizontalContentAlignment="Center"
+                             Width="200"
+                             Margin="0,15,0,0"
+                             Text="{Binding Path = InputTotalPagesOccupied}">
+                    </TextBox>
+                    <TextBlock Text="Total Pages Occupied"
+                               FontSize="15"
+                               FontFamily="Gotham"
+                               HorizontalAlignment="Center">
+                    </TextBlock>
+                    <TextBox HorizontalAlignment="Center"
+                             HorizontalContentAlignment="Center"
+                             Width="200"
+                             Margin="0,15,0,0"
+                             Text="{Binding Path = InputBeginningPageNumber}">
+                    </TextBox>
+                    <TextBlock Text="Beginning Page Number"
+                               FontSize="15"
+                               FontFamily="Gotham"
+                               HorizontalAlignment="Center">
+                    </TextBlock>
+                    <Button HorizontalAlignment="Center" 
+                            Margin="0,15,0,0" 
+                            Width="170"
+                            Height="40"
+                            Command="{Binding Path = ScheduleManuscriptCommand}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image Source="/Pictures/002-schedule.png" 
+                                   Width="35"
+                                   Height="35"
+                                   Stretch="Fill"/>
+                            <TextBlock Text="Schedule"
+                                       FontSize="18"
+                                       FontFamily="Gotham"
+                                       Margin="10,0,0,0"
+                                       VerticalAlignment="Center">
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <!-- Separator -->
+                <Border BorderThickness="1" BorderBrush="#404DB6"></Border>
+                <!-- Fourth Pane -->
+                <StackPanel Height="550" Width="325">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="Issues" 
+                                   FontSize="24" 
+                                   FontFamily="MotivaSansW05-ExtraBold" 
+                                   FontStretch="SemiExpanded" 
+                                   HorizontalAlignment="Center">
+                        </TextBlock>
+                        <Button Margin="10,0,0,0"
+                                Content="L"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                FontFamily="Gotham"
+                                Command="{Binding Path = LoadSelectedIssueManuscriptListCommand}"></Button>
+                    </StackPanel>
+                    <ListBox Width="300" 
+                             Margin="0,5,0,0" 
+                             Background="#404DB6" 
+                             Height="125" 
+                             ItemsSource="{Binding Path = IssueList}" 
+                             SelectionMode="Single"
+                             SelectedItem="{Binding Path = SelectedIssue}"
+                             HorizontalAlignment="Center">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel CanVerticallyScroll="True" CanHorizontallyScroll="True">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Margin="5,0,0,0" 
+                                                   Text="{Binding Path = PrintDate}"
+                                                   Foreground="White">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <TextBlock Text="Manuscripts Inside" 
+                               FontSize="24" 
+                               FontFamily="MotivaSansW05-ExtraBold" 
+                               FontStretch="SemiExpanded" 
+                               HorizontalAlignment="Center"
+                               Margin="0,10,0,0">
+                    </TextBlock>
+                    <ListBox Width="300" 
+                             Margin="0,5,0,0" 
+                             Background="#404DB6" 
+                             Height="125" 
+                             ItemsSource="{Binding Path = SelectedIssueManuscriptList}" 
+                             SelectionMode="Single"
+                             SelectedItem="{Binding Path = SelectedIssueManuscript}"
+                             HorizontalAlignment="Center">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel CanVerticallyScroll="True" CanHorizontallyScroll="True">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Margin="5,0,0,0" 
+                                                   Text="{Binding Path = ManuscriptTitle}"
+                                                   Foreground="White">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <TextBlock Text="Add an Issue" 
+                               FontSize="24" 
+                               FontFamily="MotivaSansW05-ExtraBold" 
+                               FontStretch="SemiExpanded" 
+                               HorizontalAlignment="Center"
+                               Margin="0,10,0,0">
+                    </TextBlock>
+                    <StackPanel Orientation="Horizontal" 
+                                Margin="0,2,0,0">
+                        <StackPanel Width="150">
+                            <TextBox HorizontalAlignment="Center"
+                                     HorizontalContentAlignment="Center"
+                                     Width="50">
+                            </TextBox>
+                            <TextBlock Text="Volume Number"
+                                       FontSize="15"
+                                       FontFamily="Gotham"
+                                       HorizontalAlignment="Center">
+                            </TextBlock>
+                            <TextBox HorizontalAlignment="Center"
+                                     HorizontalContentAlignment="Center"
+                                     Width="50">
+                            </TextBox>
+                            <TextBlock Text="Issue Number"
+                                       FontFamily="Gotham"
+                                       FontSize="15"
+                                       HorizontalAlignment="Center"
+                                       Margin="0,3,0,0">
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Width="150" 
+                                    Margin="5,0,0,0">
+                            <ComboBox ItemsSource="{Binding }" 
+                                      Height="30"
+                                      Width="50">
+                            </ComboBox>
+                            <TextBlock Text="Publication Period"
+                                       FontSize="15"
+                                       FontFamily="Gotham"
+                                       HorizontalAlignment="Center">
+                            </TextBlock>
+                            <ComboBox ItemsSource="{Binding }" 
+                                      Height="30"
+                                      Width="50">
+                            </ComboBox>
+                            <TextBlock Text="Publication Year"
+                                       FontFamily="Gotham"
+                                       FontSize="15"
+                                       HorizontalAlignment="Center"
+                                       Margin="0,3,0,0">
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                    <Button HorizontalAlignment="Center" 
+                            Margin="0,17,0,0" 
+                            Width="170"
+                            Height="40">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image Source="/Pictures/006-agenda.png" 
+                                   Width="35"
+                                   Height="35"
+                                   Stretch="Fill"/>
+                            <TextBlock Text="Add"
+                                       FontSize="18"
+                                       FontFamily="Gotham"
+                                       Margin="10,0,0,0"
+                                       VerticalAlignment="Center">
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

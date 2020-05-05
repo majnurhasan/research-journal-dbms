@@ -1,0 +1,85 @@
+﻿<Window x:Class="DBMSProject.InformationOnProfileWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DBMSProject"
+        mc:Ignorable="d"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Icon="/Pictures/022-documents.png"
+        WindowStartupLocation="CenterScreen"
+        Title="Journal of E-commerce Research Knowledge" 
+        Height="270" MaxHeight="270" 
+        Width="350" MaxWidth="350">
+    <Grid>
+        <StackPanel Margin="5">
+            <TextBlock Text="Profile" 
+                       FontSize="32" 
+                       FontFamily="MotivaSansW05-ExtraBold" 
+                       FontStretch="SemiExpanded" 
+                       HorizontalAlignment="Center">
+            </TextBlock>
+            <Border BorderThickness="0,0,0,2" 
+                    Margin="0,5,0,0"
+                    BorderBrush="#404DB6" 
+                    Width="280"  
+                    HorizontalAlignment="Center">
+                <TextBlock Text="{Binding Path = Name}" 
+                           FontSize="12" 
+                           FontWeight="Bold" 
+                           HorizontalAlignment="Center"></TextBlock>
+            </Border>
+            <TextBlock Text="Name"
+                       FontSize="15"
+                       FontFamily="Gotham"
+                       HorizontalAlignment="Center">
+            </TextBlock>
+            <Border BorderThickness="0,0,0,2" 
+                    Margin="0,5,0,0"
+                    BorderBrush="#404DB6" 
+                    Width="280"  
+                    HorizontalAlignment="Center">
+                <TextBlock Text="{Binding Path = MailingAddress}" 
+                           FontSize="12" 
+                           FontWeight="Bold" 
+                           HorizontalAlignment="Center"></TextBlock>
+            </Border>
+            <TextBlock Text="Mailing Address"
+                       FontSize="15"
+                       FontFamily="Gotham"
+                       HorizontalAlignment="Center">
+            </TextBlock>
+            <Border BorderThickness="0,0,0,2" 
+                    Margin="0,5,0,0"
+                    BorderBrush="#404DB6" 
+                    Width="280"  
+                    HorizontalAlignment="Center">
+                <TextBlock Text="{Binding Path = EmailAddress}" 
+                           FontSize="12" 
+                           FontWeight="Bold" 
+                           HorizontalAlignment="Center"></TextBlock>
+            </Border>
+            <TextBlock Text="Email Address"
+                       FontSize="15"
+                       FontFamily="Gotham"
+                       HorizontalAlignment="Center">
+            </TextBlock>
+            <Border BorderThickness="0,0,0,2" 
+                    Margin="0,5,0,0"
+                    BorderBrush="#404DB6" 
+                    Width="280"  
+                    HorizontalAlignment="Center">
+                <TextBlock Text="{Binding Path = Affiliation}" 
+                           FontSize="12" 
+                           FontWeight="Bold" 
+                           HorizontalAlignment="Center"></TextBlock>
+            </Border>
+            <TextBlock Text="Affiliation"
+                       FontSize="15"
+                       FontFamily="Gotham"
+                       HorizontalAlignment="Center">
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</Window>

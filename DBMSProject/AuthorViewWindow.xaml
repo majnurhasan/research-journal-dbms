@@ -1,0 +1,316 @@
+﻿<Window x:Class="DBMSProject.AuthorViewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DBMSProject"
+        mc:Ignorable="d"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Icon="/Pictures/022-documents.png"
+        WindowStartupLocation="CenterScreen"
+        Title="Journal of E-commerce Research Knowledge" 
+        Height="700" MaxHeight="700" 
+        Width="900" MaxWidth="900">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="121*"/>
+            <ColumnDefinition Width="69*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="5" Grid.ColumnSpan="2">
+            <!-- Header -->
+            <StackPanel Orientation="Horizontal" 
+                        Margin="2">
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Left"
+                            Width="610"
+                            Height="60">
+                    <TextBlock Text="Welcome, " 
+                               FontSize="24" 
+                               FontFamily="MotivaSansW05-ExtraBold" 
+                               FontStretch="SemiExpanded" 
+                               HorizontalAlignment="Left" 
+                               VerticalAlignment="Center"
+                               Margin="5,0,0,0">
+                    </TextBlock>
+                    <TextBlock Text="{Binding Path = AuthorFirstName}" 
+                               FontSize="24" 
+                               FontFamily="MotivaSansW05-ExtraBold" 
+                               FontStretch="SemiExpanded" 
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center">
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Right">
+                    <Button Height="60" 
+                            Width="60" 
+                            HorizontalAlignment="Right"
+                            Command="{Binding Path = LogoutCommand}">
+                        <StackPanel>
+                            <Image Source="/Pictures/return.png" 
+                                   Width="30"
+                                   Height="30"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Stretch="Fill"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Height="60" 
+                            Width="60" 
+                            HorizontalAlignment="Right"
+                            Margin="5,0,0,0"
+                            Command="{Binding Path = RefreshCommand}">
+                        <StackPanel>
+                            <Image Source="/Pictures/010-location.png" 
+                                   Width="30"
+                                   Height="30"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Stretch="Fill"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Height="60" 
+                            Width="60" 
+                            HorizontalAlignment="Right"
+                            Margin="5,0,0,0"
+                            Command="{Binding Path = ProfileCommand}">
+                        <StackPanel>
+                            <Image Source="/Pictures/017-newspaper.png" 
+                                   Width="30"
+                                   Height="30"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Stretch="Fill"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Height="60" 
+                            Width="60" 
+                            HorizontalAlignment="Right"
+                            Margin="5,0,0,0"
+                            Command="{Binding Path = InformationCommand}">
+                        <StackPanel>
+                            <Image Source="/Pictures/008-idea.png" 
+                                   Width="30"
+                                   Height="30"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Stretch="Fill"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+            <!-- Body -->
+            <StackPanel Orientation="Horizontal" 
+                        Margin="0,30,0,0">
+                <!-- Left Pane -->
+                <StackPanel Width="500" Height="550">
+                    <TextBlock Text="Notifications" 
+                               FontSize="24" 
+                               FontFamily="MotivaSansW05-ExtraBold" 
+                               FontStretch="SemiExpanded" 
+                               HorizontalAlignment="Center">
+                    </TextBlock>
+                    <ListBox Width="450" 
+                             Margin="0,5,0,0" 
+                             Background="#404DB6" 
+                             Height="125" 
+                             ItemsSource="{Binding Path = LoggedNotificationList}" 
+                             SelectionMode="Single"
+                             HorizontalAlignment="Center">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel CanVerticallyScroll="True">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Margin="5,0,0,0" 
+                                                   Text="{Binding Path = Message}"
+                                                   Foreground="White"
+                                                   FontSize="7">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <TextBlock Text="Manuscripts" 
+                               FontSize="24" 
+                               FontFamily="MotivaSansW05-ExtraBold" 
+                               FontStretch="SemiExpanded" 
+                               HorizontalAlignment="Center"
+                               Margin="0,10,0,0">
+                    </TextBlock>
+                    <ListBox Width="450" 
+                             Margin="0,5,0,0" 
+                             Background="#404DB6" 
+                             Height="330" 
+                             ItemsSource="{Binding Path = LoggedManuscriptList}" 
+                             SelectionMode="Single"
+                             SelectedItem="{Binding Path = SelectedManuscript}"
+                             HorizontalAlignment="Center">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel CanVerticallyScroll="True">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Margin="5,0,0,0" 
+                                                   Text="{Binding Path = ManuscriptTitle}"
+                                                   Foreground="White">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+                <!-- Separator -->
+                <Border BorderThickness="1" BorderBrush="#404DB6"></Border>
+                <!-- Right Pane -->
+                <StackPanel Height="550" Width="390">
+                    <TextBlock Text="Add Manuscript" 
+                               FontSize="24" 
+                               FontFamily="MotivaSansW05-ExtraBold" 
+                               FontStretch="SemiExpanded" 
+                               HorizontalAlignment="Center">
+                    </TextBlock>
+                    <TextBox HorizontalAlignment="Center"
+                             HorizontalContentAlignment="Center"
+                             Width="300"
+                             Text="{Binding Path = InputManuscriptTitle}">
+                    </TextBox>
+                    <TextBlock Text="Manuscript Title"
+                               FontSize="15"
+                               FontFamily="Gotham"
+                               HorizontalAlignment="Center">
+                    </TextBlock>
+                    <ListBox Width="300" 
+                             Margin="0,10,0,0" 
+                             Background="NavajoWhite" 
+                             Height="110" 
+                             ItemsSource="{Binding Path = FrontAuthorList}" 
+                             SelectionMode="Multiple"
+                             HorizontalAlignment="Center">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel CanVerticallyScroll="True">
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox Padding="3" 
+                                                  IsChecked="{Binding Path = IsSelected}">
+                                        </CheckBox>
+                                        <TextBlock Margin="5,3" 
+                                                   Text="{Binding Path = Name}">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <TextBlock Text="Fellow Authors"
+                               FontSize="15"
+                               FontFamily="Gotham"
+                               HorizontalAlignment="Center"
+                               Margin="0,5,0,0">
+                    </TextBlock>
+                    <Button HorizontalAlignment="Center" 
+                            Margin="0,15,0,0" 
+                            Width="170"
+                            Height="40"
+                            Command="{Binding Path = SendManuscriptCommand}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image Source="/Pictures/028-project.png" 
+                                   Width="35"
+                                   Height="35"
+                                   Stretch="Fill"/>
+                            <TextBlock Text="Send"
+                                       FontSize="18"
+                                       FontFamily="Gotham"
+                                       Margin="10,0,0,0"
+                                       VerticalAlignment="Center">
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <TextBlock Text="Additional Details" 
+                               Margin="0,30,0,0"
+                               FontSize="24" 
+                               FontFamily="MotivaSansW05-ExtraBold" 
+                               FontStretch="SemiExpanded" 
+                               HorizontalAlignment="Center">
+                    </TextBlock>
+                    <Border BorderThickness="0,0,0,2" 
+                            Margin="0,3,0,0"
+                            BorderBrush="#404DB6" 
+                            Width="280"  
+                            HorizontalAlignment="Center">
+                        <TextBlock Text="{Binding Path = SelectedManuscript.ManuscriptStatus}" 
+                                   FontSize="12" 
+                                   FontWeight="Bold" 
+                                   HorizontalAlignment="Center"></TextBlock>
+                    </Border>
+                    <TextBlock Text="Manuscript Status"
+                               FontSize="15"
+                               FontFamily="Gotham"
+                               HorizontalAlignment="Center">
+                    </TextBlock>
+                    <Border BorderThickness="0,0,0,2" 
+                            Margin="0,3,0,0"
+                            BorderBrush="#404DB6" 
+                            Width="280"  
+                            HorizontalAlignment="Center">
+                        <TextBlock Text="{Binding Path = SelectedManuscript.DateReceived}" 
+                                   FontSize="12" 
+                                   FontWeight="Bold" 
+                                   HorizontalAlignment="Center"></TextBlock>
+                    </Border>
+                    <TextBlock Text="Date Sent"
+                               FontSize="15"
+                               FontFamily="Gotham"
+                               HorizontalAlignment="Center">
+                    </TextBlock>
+                    <Border BorderThickness="0,0,0,2" 
+                            Margin="0,3,0,0"
+                            BorderBrush="#404DB6" 
+                            Width="280"  
+                            HorizontalAlignment="Center">
+                        <TextBlock Text="{Binding Path = SelectedManuscript.DateAccepted}" 
+                                   FontSize="12" 
+                                   FontWeight="Bold" 
+                                   HorizontalAlignment="Center"></TextBlock>
+                    </Border>
+                    <TextBlock Text="Date Accepted"
+                               FontSize="15"
+                               FontFamily="Gotham"
+                               HorizontalAlignment="Center">
+                    </TextBlock>
+                    <Border BorderThickness="0,0,0,2" 
+                            Margin="0,3,0,0"
+                            BorderBrush="#404DB6" 
+                            Width="280"  
+                            HorizontalAlignment="Center">
+                        <TextBlock Text="{Binding Path = SelectedManuscript.NumberOfPagesOccupied}" 
+                                   FontSize="12" 
+                                   FontWeight="Bold" 
+                                   HorizontalAlignment="Center"></TextBlock>
+                    </Border>
+                    <TextBlock Text="Total Pages"
+                               FontSize="15"
+                               FontFamily="Gotham"
+                               HorizontalAlignment="Center">
+                    </TextBlock>
+                    <Border BorderThickness="0,0,0,2" 
+                            Margin="0,3,0,0"
+                            BorderBrush="#404DB6" 
+                            Width="280"  
+                            HorizontalAlignment="Center">
+                        <TextBlock Text="{Binding Path = SelectedManuscript.BeginningPageNumber}" 
+                                   FontSize="12" 
+                                   FontWeight="Bold" 
+                                   HorizontalAlignment="Center"></TextBlock>
+                    </Border>
+                    <TextBlock Text="Beginning Page Number"
+                               FontSize="15"
+                               FontFamily="Gotham"
+                               HorizontalAlignment="Center">
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
